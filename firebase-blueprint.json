@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user resume text and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The user's unique ID" },
+        "email": { "type": "string", "format": "email", "description": "The user's email address" },
+        "resumeText": { "type": "string", "description": "The extracted text from the user's resume" },
+        "preferences": {
+          "type": "object",
+          "properties": {
+            "role": { "type": "string" },
+            "company": { "type": "string" },
+            "workType": { "type": "string" },
+            "minSalary": { "type": "number" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "JobMatch": {
+      "title": "Job Match",
+      "description": "Stores job matches for a user",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The user's unique ID" },
+        "title": { "type": "string" },
+        "company": { "type": "string" },
+        "location": { "type": "string" },
+        "link": { "type": "string" },
+        "type": { "type": "string" },
+        "matchPercentage": { "type": "number" },
+        "matchReason": { "type": "string" },
+        "techStackAlignment": { "type": "number" },
+        "cultureFit": { "type": "number" },
+        "growthPotential": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "title", "company"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "UserProfile",
+      "description": "User profiles"
+    },
+    "/users/{uid}/matches/{matchId}": {
+      "schema": "JobMatch",
+      "description": "Job matches for a user"
+    }
+  }
+}
